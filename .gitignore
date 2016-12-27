@@ -1,3 +1,18 @@
+.ipynb_checkpoints/*
+metadata/*
+data/*
+*.pyc
+*.mat
+*.npy
+*.tgz
+*.zip
+*.tar.gz
+
+#jetbrains
+*.idea
+
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
