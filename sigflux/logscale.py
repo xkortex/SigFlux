@@ -1,6 +1,7 @@
 import numpy as np
 from scipy import fftpack, interpolate, signal
-import clip
+
+from sigflux import clip
 
 
 def freq_logscale(data, ndim=1024, fs=400, down=30, smoothing_cutoff=1, hard_cutoff=200, log_low_cut=-2.32,
