@@ -3,7 +3,7 @@ from __future__ import division, print_function
 import numpy as np
 from scipy import signal
 
-from sigflux.wave.cwtlets import CWTlets
+from sigflux.wave import cwtlets
 
 def abthresh(x, thresh=1.):
     """
@@ -37,7 +37,7 @@ def acwt(sig, widths):
     magical_constant = 16.854880972 # this doesn't actually scale properly
     # Somehow, I'm still seing dependence on the number of widths.
     cwt_r = signal.cwt(sig, signal.ricker, widths)
-    cwt_i = signal.cwt(sig, CWTlets.ricker_i, widths)
+    cwt_i = signal.cwt(sig, cwtlets.ricker_i, widths)
     a_sig = lazy_icwt(cwt_r, widths) + 1j * lazy_icwt(cwt_i, widths)
     return a_sig #* magical_constant
 
@@ -51,7 +51,7 @@ def wavediff1d(sig, width=10, padout_ratio=.1):
     """
     pad_width = int(padout_ratio*len(sig))
     padded_sig = np.pad(sig, pad_width, 'edge')
-    cw = signal.cwt(padded_sig, CWTlets.haar, (width,)).T
+    cw = signal.cwt(padded_sig, cwtlets.haar, (width,)).T
     return cw[pad_width:-pad_width]
 
 def conv(img, kern, renorm=False):
