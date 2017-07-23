@@ -91,8 +91,22 @@ def morlet(n, a):
     return s_morlet(n, a)
 
 
-def gausslet(n, a):
-    return s_morlet(n, a, 0.)
+def gausslet(n, w, ksi=4, winscale=6):
+    """
+    Area-normalized (to 1) gaussian pulse designed for use with CWT
+    :param n:
+    :param w:
+    :param ksi: Width scaling parameter, probably should not touch this
+    :param winscale: Width scaling parameter, probably should not touch this
+    :return:
+    """
+    # when w = n//8, window is approx 3 sigma
+    n = float(n)
+    w = float(w)
+    t = winscale*np.arange(-n / 2, n / 2) / n
+    s = ((w / n) * ksi) ** 0.5
+    a = 1 / (s * (2*np.pi)**0.5)
+    return winscale * a * np.exp(-0.5 * (t/s) ** 2) / n
 
 
 def igausslet(n, a):
